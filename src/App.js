@@ -1,11 +1,12 @@
 import React from 'react';
-
-import Categories from './components/Categories';
 import Header from './components/Header';
-import Sort from './components/Sort';
 
 import './scss/app.scss';
-import PizzaBlock from './components/PizzaBlock';
+import { Route, Routes } from 'react-router-dom';
+
+import Home from './pages/Home';
+import Cart from './pages/Cart';
+import NotFound from './pages/NotFound';
 
 const App = () => {
     return (
@@ -13,22 +14,12 @@ const App = () => {
             <Header />
             <div className="content">
                 <div className="container">
-                    <div className="content__top">
-                        <Categories />
-                        <Sort />
-                    </div>
-                    <h2 className="content__title">Все пиццы</h2>
-                    <div className="content__items">
-                        <PizzaBlock />
-                        <PizzaBlock />
-                        <PizzaBlock />
-                        <PizzaBlock />
-                        <PizzaBlock />
-                        <PizzaBlock />
-                        <PizzaBlock />
-                        <PizzaBlock />
-                        <PizzaBlock />
-                    </div>
+                    <Routes>
+                        <Route path="*" element={<NotFound />} />
+
+                        <Route path="/" element={<Home />} />
+                        <Route path="/cart" element={<Cart />} />
+                    </Routes>
                 </div>
             </div>
         </div>
