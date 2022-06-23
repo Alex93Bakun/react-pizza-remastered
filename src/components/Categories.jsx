@@ -1,22 +1,16 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 
 const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
-const Categories = memo(() => {
-    const [activeIndex, setActiveIndex] = useState(0);
-
-    const categoryClickHandler = (index) => {
-        setActiveIndex(index);
-    };
-
+const Categories = memo(({ value, onCategoryClickHandler }) => {
     return (
         <div className="categories">
             <ul>
                 {categories.map((categoryName, i) => (
                     <li
                         key={i}
-                        onClick={() => categoryClickHandler(i)}
-                        className={activeIndex === i ? 'active' : ''}>
+                        onClick={() => onCategoryClickHandler(i)}
+                        className={value === i ? 'active' : ''}>
                         {categoryName}
                     </li>
                 ))}

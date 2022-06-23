@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 
-const list = ['популярности', 'цене', 'алфавиту'];
+const list = [
+    { name: 'популярности (ASC)', sortProperty: 'rating' },
+    { name: 'популярности (DESC)', sortProperty: '-rating' },
+    { name: 'цене (ASC)', sortProperty: 'price' },
+    { name: 'цене (DESC)', sortProperty: '-price' },
+    { name: 'алфавиту (ASC)', sortProperty: 'title' },
+    { name: 'алфавиту (DESC)', sortProperty: '-title' },
+];
 
-const Sort = () => {
+const Sort = memo(({ value, onSortClickHandler }) => {
     const [isVisible, setIsVisible] = useState(false);
-    const [selected, setSelected] = useState(0);
-
-    const sortTypeName = list[selected];
 
     const selectSortTypeHandler = (i) => {
-        setSelected(i);
+        onSortClickHandler(i);
         setIsVisible(false);
     };
 
@@ -28,16 +32,16 @@ const Sort = () => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => setIsVisible(!isVisible)}>{sortTypeName}</span>
+                <span onClick={() => setIsVisible(!isVisible)}>{value.name}</span>
             </div>
             {isVisible && (
                 <div className="sort__popup">
                     <ul>
-                        {list.map((name, i) => (
+                        {list.map(({ name, sortProperty }, i) => (
                             <li
                                 key={i}
-                                onClick={() => selectSortTypeHandler(i)}
-                                className={selected === i ? 'active' : ''}>
+                                onClick={() => selectSortTypeHandler({ name, sortProperty })}
+                                className={value.sortProperty === sortProperty ? 'active' : ''}>
                                 {name}
                             </li>
                         ))}
@@ -46,6 +50,6 @@ const Sort = () => {
             )}
         </div>
     );
-};
+});
 
 export default Sort;
