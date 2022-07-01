@@ -1,4 +1,6 @@
 import React, { memo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSort } from '../redux/slices/filterSlice';
 
 const list = [
     { name: 'популярности (ASC)', sortProperty: 'rating' },
@@ -9,11 +11,13 @@ const list = [
     { name: 'алфавиту (DESC)', sortProperty: '-title' },
 ];
 
-const Sort = memo(({ value, onSortClickHandler }) => {
+const Sort = memo(() => {
+    const dispatch = useDispatch();
+    const sort = useSelector((state) => state.filter.sort);
     const [isVisible, setIsVisible] = useState(false);
 
-    const selectSortTypeHandler = (i) => {
-        onSortClickHandler(i);
+    const selectSortTypeHandler = (obj) => {
+        dispatch(setSort(obj));
         setIsVisible(false);
     };
 
@@ -32,7 +36,7 @@ const Sort = memo(({ value, onSortClickHandler }) => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => setIsVisible(!isVisible)}>{value.name}</span>
+                <span onClick={() => setIsVisible(!isVisible)}>{sort.name}</span>
             </div>
             {isVisible && (
                 <div className="sort__popup">
@@ -41,7 +45,7 @@ const Sort = memo(({ value, onSortClickHandler }) => {
                             <li
                                 key={i}
                                 onClick={() => selectSortTypeHandler({ name, sortProperty })}
-                                className={value.sortProperty === sortProperty ? 'active' : ''}>
+                                className={sort.sortProperty === sortProperty ? 'active' : ''}>
                                 {name}
                             </li>
                         ))}
