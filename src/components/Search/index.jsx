@@ -6,7 +6,7 @@ import styles from './Search.module.scss';
 
 const Search = () => {
     const [value, setValue] = useState('');
-    const { searchValue, setSearchValue } = useContext(SearchContext);
+    const { setSearchValue } = useContext(SearchContext);
     const inputRef = useRef(null);
 
     const updateSearchValue = useCallback(
