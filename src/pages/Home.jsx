@@ -12,7 +12,7 @@ import {
     setFilters,
 } from '../redux/slices/filterSlice';
 import qs from 'qs';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { fetchPizzas, pizzaSelector } from '../redux/slices/pizzaSlice';
 
 const Home = () => {
@@ -52,7 +52,11 @@ const Home = () => {
         );
     };
 
-    const pizzas = items.map((item) => <PizzaBlock key={item.id} {...item} />);
+    const pizzas = items.map((item) => (
+        <Link to={`pizza/${item.id}`} key={item.id}>
+            <PizzaBlock {...item} />
+        </Link>
+    ));
     const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
 
     useEffect(() => {
