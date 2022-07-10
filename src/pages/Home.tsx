@@ -19,19 +19,19 @@ const Home = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const isSearch = useRef(false);
-    const isMounted = useRef(false);
+    const isSearch = useRef<boolean>(false);
+    const isMounted = useRef<boolean>(false);
 
     const { categoryId, sort, currentPage, searchValue } = useSelector(filterSelector);
     const { items, status } = useSelector(pizzaSelector);
 
     const sortType = sort.sortProperty;
 
-    const onClickCategory = (id) => {
+    const onClickCategory = (id: number) => {
         dispatch(setCategoryId(id));
     };
 
-    const onPageChange = (number) => {
+    const onPageChange = (number: number) => {
         dispatch(setCurrentPage(number));
     };
 
@@ -42,6 +42,7 @@ const Home = () => {
         const search = searchValue.length > 0 ? `&title=${searchValue}` : '';
 
         dispatch(
+            // @ts-ignore
             fetchPizzas({
                 sortBy,
                 order,
@@ -52,7 +53,7 @@ const Home = () => {
         );
     };
 
-    const pizzas = items.map((item) => (
+    const pizzas = items.map((item: any) => (
         <Link to={`pizza/${item.id}`} key={item.id}>
             <PizzaBlock {...item} />
         </Link>

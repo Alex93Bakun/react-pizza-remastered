@@ -2,7 +2,12 @@ import React, { memo, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSort, sortSelector } from '../redux/slices/filterSlice';
 
-export const list = [
+type TListItem = {
+    name: string;
+    sortProperty: string;
+};
+
+export const list: TListItem[] = [
     { name: 'популярности (ASC)', sortProperty: 'rating' },
     { name: 'популярности (DESC)', sortProperty: '-rating' },
     { name: 'цене (ASC)', sortProperty: 'price' },
@@ -14,16 +19,16 @@ export const list = [
 const Sort = memo(() => {
     const dispatch = useDispatch();
     const sort = useSelector(sortSelector);
-    const sortRef = useRef();
+    const sortRef = useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(false);
 
-    const selectSortTypeHandler = (obj) => {
+    const selectSortTypeHandler = (obj: TListItem) => {
         dispatch(setSort(obj));
         setIsVisible(false);
     };
 
     useEffect(() => {
-        const clickOutsideHandler = (event) => {
+        const clickOutsideHandler = (event: any) => {
             if (!event.composedPath().includes(sortRef.current)) {
                 setIsVisible(false);
             }
