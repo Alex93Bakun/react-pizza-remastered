@@ -4,23 +4,21 @@ import ReactPaginate from 'react-paginate';
 import styles from './Pagination.module.scss';
 
 type TPaginationProps = {
-    onPageChangeHandler: any;
+    onPageChangeHandler: (page: number) => void;
     currentPage: number;
 };
 
-const Pagination: FC<TPaginationProps> = ({ onPageChangeHandler, currentPage }) => {
-    return (
-        <ReactPaginate
-            className={styles.root}
-            breakLabel="..."
-            nextLabel=">"
-            onPageChange={(event) => onPageChangeHandler(event.selected + 1)}
-            pageRangeDisplayed={8}
-            pageCount={3}
-            forcePage={currentPage - 1}
-            previousLabel="<"
-        />
-    );
-};
+const Pagination: FC<TPaginationProps> = ({ onPageChangeHandler, currentPage }) => (
+    <ReactPaginate
+        className={styles.root}
+        breakLabel="..."
+        nextLabel=">"
+        onPageChange={(event) => onPageChangeHandler(event.selected + 1)}
+        pageRangeDisplayed={8}
+        pageCount={3}
+        forcePage={currentPage - 1}
+        previousLabel="<"
+    />
+);
 
 export default Pagination;

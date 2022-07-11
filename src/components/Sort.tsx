@@ -28,8 +28,8 @@ const Sort = memo(() => {
     };
 
     useEffect(() => {
-        const clickOutsideHandler = (event: any) => {
-            if (!event.composedPath().includes(sortRef.current)) {
+        const clickOutsideHandler = (event: MouseEvent) => {
+            if (!event.composedPath().includes(sortRef.current!)) {
                 setIsVisible(false);
             }
         };

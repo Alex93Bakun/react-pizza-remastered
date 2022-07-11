@@ -1,11 +1,11 @@
 import React, { FC, memo } from 'react';
 
-const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
-
 type TCategoriesProps = {
     value: number;
-    onCategoryClickHandler: any;
+    onCategoryClickHandler: (i: number) => void;
 };
+
+const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
 const Categories: FC<TCategoriesProps> = memo(({ value, onCategoryClickHandler }) => {
     return (
