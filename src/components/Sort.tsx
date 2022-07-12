@@ -1,19 +1,19 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSort, sortSelector } from '../redux/slices/filterSlice';
+import { setSort, SortPropertyEnum, sortSelector, TSort } from '../redux/slices/filterSlice';
 
 type TListItem = {
     name: string;
-    sortProperty: string;
+    sortProperty: SortPropertyEnum;
 };
 
 export const list: TListItem[] = [
-    { name: 'популярности (ASC)', sortProperty: 'rating' },
-    { name: 'популярности (DESC)', sortProperty: '-rating' },
-    { name: 'цене (ASC)', sortProperty: 'price' },
-    { name: 'цене (DESC)', sortProperty: '-price' },
-    { name: 'алфавиту (ASC)', sortProperty: 'title' },
-    { name: 'алфавиту (DESC)', sortProperty: '-title' },
+    { name: 'популярности (ASC)', sortProperty: SortPropertyEnum.RATING_ASC },
+    { name: 'популярности (DESC)', sortProperty: SortPropertyEnum.RATING_DESC },
+    { name: 'цене (ASC)', sortProperty: SortPropertyEnum.PRICE_ASC },
+    { name: 'цене (DESC)', sortProperty: SortPropertyEnum.PRICE_DESC },
+    { name: 'алфавиту (ASC)', sortProperty: SortPropertyEnum.TITLE_ASC },
+    { name: 'алфавиту (DESC)', sortProperty: SortPropertyEnum.TITLE_DESC },
 ];
 
 const Sort = memo(() => {
@@ -23,7 +23,7 @@ const Sort = memo(() => {
     const [isVisible, setIsVisible] = useState(false);
 
     const selectSortTypeHandler = (obj: TListItem) => {
-        dispatch(setSort(obj));
+        dispatch(setSort(obj as TSort));
         setIsVisible(false);
     };
 

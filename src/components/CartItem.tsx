@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { addItem, minusItem, removeItem } from '../redux/slices/cartSlice';
+import { addItem, minusItem, removeItem, TCartItem } from '../redux/slices/cartSlice';
 
 type TCartItemProps = {
-    id: number;
+    id: string;
     title: string;
     type: string;
     size: number;
@@ -20,7 +20,7 @@ const CartItem: FC<TCartItemProps> = ({ id, title, type, size, price, count, ima
             addItem({
                 id,
                 price,
-            }),
+            } as TCartItem),
         );
     };
 
@@ -29,7 +29,7 @@ const CartItem: FC<TCartItemProps> = ({ id, title, type, size, price, count, ima
             minusItem({
                 id,
                 price,
-            }),
+            } as TCartItem),
         );
     };
 
@@ -39,7 +39,7 @@ const CartItem: FC<TCartItemProps> = ({ id, title, type, size, price, count, ima
                 removeItem({
                     id,
                     price,
-                }),
+                } as TCartItem),
             );
         }
     };
