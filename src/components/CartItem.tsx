@@ -13,7 +13,7 @@ type TCartItemProps = {
     imageUrl: string;
 };
 
-const CartItem: FC<TCartItemProps> = ({ id, title, type, size, price, count, imageUrl }) => {
+export const CartItem: FC<TCartItemProps> = ({ id, title, type, size, price, count, imageUrl }) => {
     const dispatch = useDispatch();
 
     const onPlusClick = () => {
@@ -122,5 +122,3 @@ const CartItem: FC<TCartItemProps> = ({ id, title, type, size, price, count, ima
         </div>
     );
 };
-
-export default CartItem;

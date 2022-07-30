@@ -21,7 +21,7 @@ export const list: TListItem[] = [
     { name: 'алфавиту (DESC)', sortProperty: SortPropertyEnum.TITLE_DESC },
 ];
 
-const Sort: FC<TSortProps> = memo(({ value }) => {
+export const Sort: FC<TSortProps> = memo(({ value }) => {
     const dispatch = useDispatch();
     const sortRef = useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(false);
@@ -79,5 +79,3 @@ const Sort: FC<TSortProps> = memo(({ value }) => {
         </div>
     );
 });
-
-export default Sort;
