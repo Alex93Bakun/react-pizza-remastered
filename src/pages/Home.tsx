@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import { Skeleton } from '../components/PizzaBlock/Skeleton';
@@ -17,9 +17,9 @@ const Home = () => {
 
     const sortType = sort.sortProperty;
 
-    const onClickCategory = (id: number) => {
+    const onClickCategory = useCallback((id: number) => {
         dispatch(setCategoryId(id));
-    };
+    }, []);
 
     const onPageChange = (number: number) => {
         dispatch(setCurrentPage(number));
@@ -56,7 +56,7 @@ const Home = () => {
         <div className="container">
             <div className="content__top">
                 <Categories value={categoryId} onCategoryClickHandler={onClickCategory} />
-                <Sort />
+                <Sort value={sort} />
             </div>
             <h2 className="content__title">Все пиццы</h2>
             {status === 'error' ? (

@@ -1,10 +1,14 @@
-import React, { memo, useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setSort, SortPropertyEnum, sortSelector, TSort } from '../redux/slices/filterSlice';
+import React, { FC, memo, useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setSort, SortPropertyEnum, TSort } from '../redux/slices/filterSlice';
 
 type TListItem = {
     name: string;
     sortProperty: SortPropertyEnum;
+};
+
+type TSortProps = {
+    value: TSort;
 };
 
 export const list: TListItem[] = [
@@ -16,9 +20,8 @@ export const list: TListItem[] = [
     { name: 'алфавиту (DESC)', sortProperty: SortPropertyEnum.TITLE_DESC },
 ];
 
-const Sort = memo(() => {
+const Sort: FC<TSortProps> = memo(({ value }) => {
     const dispatch = useDispatch();
-    const sort = useSelector(sortSelector);
     const sortRef = useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(false);
 
@@ -56,7 +59,7 @@ const Sort = memo(() => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => setIsVisible(!isVisible)}>{sort.name}</span>
+                <span onClick={() => setIsVisible(!isVisible)}>{value.name}</span>
             </div>
             {isVisible && (
                 <div className="sort__popup">
@@ -65,7 +68,7 @@ const Sort = memo(() => {
                             <li
                                 key={i}
                                 onClick={() => selectSortTypeHandler({ name, sortProperty })}
-                                className={sort.sortProperty === sortProperty ? 'active' : ''}>
+                                className={value.sortProperty === sortProperty ? 'active' : ''}>
                                 {name}
                             </li>
                         ))}

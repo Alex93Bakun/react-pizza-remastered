@@ -56,7 +56,7 @@ const CartItem: FC<TCartItemProps> = ({ id, title, type, size, price, count, ima
                 </p>
             </div>
             <div className="cart__item-count">
-                <div
+                <button
                     className="button button--outline button--circle cart__item-count-minus"
                     onClick={onMinusClick}>
                     <svg
@@ -74,9 +74,9 @@ const CartItem: FC<TCartItemProps> = ({ id, title, type, size, price, count, ima
                             fill="#EB5A1E"
                         />
                     </svg>
-                </div>
+                </button>
                 <b>{count}</b>
-                <div
+                <button
                     className="button button--outline button--circle cart__item-count-plus"
                     onClick={onPlusClick}>
                     <svg
@@ -94,13 +94,13 @@ const CartItem: FC<TCartItemProps> = ({ id, title, type, size, price, count, ima
                             fill="#EB5A1E"
                         />
                     </svg>
-                </div>
+                </button>
             </div>
             <div className="cart__item-price">
                 <b>{count * price} ₴</b>
             </div>
             <div className="cart__item-remove">
-                <div className="button button--outline button--circle" onClick={onRemoveClick}>
+                <button className="button button--outline button--circle" onClick={onRemoveClick}>
                     <svg
                         width="10"
                         height="10"
@@ -116,7 +116,7 @@ const CartItem: FC<TCartItemProps> = ({ id, title, type, size, price, count, ima
                             fill="#EB5A1E"
                         />
                     </svg>
-                </div>
+                </button>
             </div>
         </div>
     );
